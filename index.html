@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>productivity tools</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="title">productivity tools</h1>
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="btn btn-small">Light Mode</button>
+        </header>
+
+        <main class="main-content">
+            <!-- Timer Tool -->
+            <section class="tool-section" id="timer-section">
+                <div class="tool-header">
+                    <h2 class="tool-title">
+                        <span class="tool-icon">⏱</span>
+                        Timer
+                    </h2>
+                    <div class="tool-status" id="timer-status">Ready</div>
+                </div>
+                
+                <div class="timer-display" id="timer-display">
+                    <span class="time-unit" id="hours">00</span>
+                    <span class="time-separator">:</span>
+                    <span class="time-unit" id="minutes">00</span>
+                    <span class="time-separator">:</span>
+                    <span class="time-unit" id="seconds">00</span>
+                </div>
+
+                <div class="timer-controls">
+                    <div class="time-input-group">
+                        <input type="number" id="hours-input" placeholder="0" min="0" max="23">
+                        <label>Hours</label>
+                    </div>
+                    <div class="time-input-group">
+                        <input type="number" id="minutes-input" placeholder="0" min="0" max="59">
+                        <label>Minutes</label>
+                    </div>
+                    <div class="time-input-group">
+                        <input type="number" id="seconds-input" placeholder="0" min="0" max="59">
+                        <label>Seconds</label>
+                    </div>
+                </div>
+
+                <!-- Timer Presets -->
+                <div class="timer-presets" style="margin: 1rem 0; display: flex; gap: 0.5rem; justify-content: center;">
+                    <button class="btn btn-small preset" data-minutes="30">30 Min</button>
+                    <button class="btn btn-small preset" data-minutes="50">50 Min</button>
+                    <button class="btn btn-small preset" data-minutes="60">1 Hour</button>
+                    <button class="btn btn-small preset" data-minutes="120">2 Hours</button>
+                </div>
+
+                <div class="timer-buttons">
+                    <button class="btn btn-primary" id="start-timer">Start</button>
+                    <button class="btn btn-secondary" id="pause-timer">Pause</button>
+                    <button class="btn btn-danger" id="reset-timer">Reset</button>
+                </div>
+            </section>
+
+            <!-- Checklist -->
+            <section class="tool-section" id="task-tracker-section">
+                <div class="tool-header">
+                    <h2 class="tool-title">
+                        <span class="tool-icon">✓</span>
+                        Checklist
+                    </h2>
+                </div>
+                <div class="task-tracker-content">
+                    <form id="add-task-form" autocomplete="off" style="display: flex; gap: 0.5rem; align-items: center;">
+                        <input type="text" id="new-task-input" class="tracker-input" placeholder="Add a new task...">
+                        <button type="submit" class="btn btn-small">Add</button>
+                    </form>
+                    <!-- New Progress Bar -->
+                    <div class="progress-container">
+                        <div class="progress-bar" id="task-progress-bar"></div>
+                    </div>
+                    <ul id="task-list" class="tracker-task-list"></ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <a class="footer-link" href="https://github.com/sampleuser/sample-repo" target="_blank" rel="noopener">View on GitHub</a>
+                <span class="footer-version">v1.0.0</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
