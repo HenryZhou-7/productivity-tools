@@ -151,17 +151,36 @@ class Timer {
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
         notification.textContent = message;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.classList.add('show');
-        }, 100);
-        
-        setTimeout(() => {
-            notification.classList.remove('show');
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
+
+        let container;
+        if (message === 'Timer completed!') {
+            // Append to header notification container and position it under the light mode button.
+            container = document.getElementById('header-notification-container');
+            notification.style.position = 'absolute';
+            notification.style.top = 'calc(100% + 5px)';
+            notification.style.right = '0';
+            notification.style.margin = '0';
+            notification.style.transform = 'none';
+            notification.style.opacity = '1';
+        } else {
+            container = document.body;
+        }
+
+        container.appendChild(notification);
+
+        if (container === document.body) {
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        } else {
+            // Auto-remove header notifications after a delay.
+            setTimeout(() => notification.remove(), 3000);
+        }
     }
 
     playNotificationSound() {
@@ -202,6 +221,25 @@ function setupTaskTracker() {
         tasks.forEach((task, idx) => {
             const li = document.createElement('li');
             li.className = 'tracker-task-item';
+            li.setAttribute('draggable', 'true');
+            li.setAttribute('data-index', idx);
+
+            // Drag event listeners for reordering
+            li.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', idx);
+            });
+            li.addEventListener('dragover', (e) => {
+                e.preventDefault(); // allow drop
+            });
+            li.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                const toIndex = parseInt(li.getAttribute('data-index'));
+                const movedTask = tasks.splice(fromIndex, 1)[0];
+                tasks.splice(toIndex, 0, movedTask);
+                saveTasks();
+                render();
+            });
 
             // Checkbox
             const checkbox = document.createElement('input');
@@ -366,8 +404,7 @@ document.head.appendChild(styleSheet);
             localStorage.setItem('theme', 'light');
         }
     });
-    
-    console.log('🚀 DevTools Hub initialized successfully!');
+
 });
 
  // Auto-save functionality

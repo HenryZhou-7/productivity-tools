@@ -10,10 +10,14 @@
 </head>
 <body>
     <div class="container">
-        <header class="header" style="display: flex; justify-content: space-between; align-items: center;">
+        <header class="header" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
             <h1 class="title">productivity tools</h1>
-            <!-- Theme Toggle Button -->
-            <button id="theme-toggle" class="btn btn-small">Light Mode</button>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; position: relative;">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="btn btn-small">Light Mode</button>
+                <!-- Header Notification Container -->
+                <div id="header-notification-container" style="position: relative; margin-top: 0.5rem;"></div>
+            </div>
         </header>
 
         <main class="main-content">
